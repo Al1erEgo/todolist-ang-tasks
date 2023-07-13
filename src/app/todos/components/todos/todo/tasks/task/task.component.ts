@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { Task, UpdateTaskRequest } from 'src/app/todos/models/tasks.models'
 import { TaskStatusEnum } from 'src/app/core/enums/taskStatus.enum'
+import {LoggerService} from "../../../../../../shared/services/logger.service";
 
 @Component({
   selector: 'tl-task',
@@ -14,6 +15,10 @@ export class TaskComponent {
   taskStatusEnum = TaskStatusEnum
   editMode = false
   newTitle = ''
+
+  constructor(private logger: LoggerService) {
+    this.logger.info('Task component initialised', 'TaskComponent')
+  }
 
   deleteTaskHandler() {
     this.deleteTaskEvent.emit(this.task.id)
@@ -30,12 +35,14 @@ export class TaskComponent {
   activateEditModeHandler() {
     this.newTitle = this.task.title
     this.editMode = true
+    this.logger.info('Edit mode deactivated', 'TaskComponent')
   }
 
   changeTitleHandler() {
     this.editMode = false
     this.changeTask({ title: this.newTitle })
     this.newTitle = ''
+    this.logger.info('Edit mode deactivated', 'TaskComponent')
   }
 
   changeTask(patch: Partial<UpdateTaskRequest>) {
