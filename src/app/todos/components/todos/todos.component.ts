@@ -24,9 +24,9 @@ export class TodosComponent implements OnInit {
   }
 
   addTodoHandler() {
+    this.logger.info('Add Todo w/title:', 'TodosComponent', this.todoTitle)
     this.todosService.addTodo(this.todoTitle)
     this.todoTitle = ''
-    this.logger.info('Add Todo w/title:', 'TodosComponent', this.todoTitle)
   }
 
   deleteTodo(todoId: string) {
