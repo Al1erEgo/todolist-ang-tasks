@@ -6,7 +6,10 @@ export enum LogLevel {
   Info = 2,
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
+
 export class LoggerService {
   constructor() {}
 
