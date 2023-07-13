@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from 'src/app/core/services/auth.service'
+import {LoggerService} from "../../../shared/services/logger.service";
 
 @Component({
   selector: 'tl-login',
@@ -17,7 +18,9 @@ export class LoginComponent {
     rememberMe: new FormControl(false),
   })
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private logger: LoggerService) {
+    this.logger.info('Login component initialised', 'LoginComponent')
+  }
 
   get email() {
     return this.loginForm.get('email')
@@ -30,5 +33,6 @@ export class LoginComponent {
   onLoginSubmit() {
     const value = this.loginForm.value
     this.authService.login(value)
+    this.logger.info('Logging in with params:', 'LoginComponent', value)
   }
 }
