@@ -50,4 +50,10 @@ describe('LoggerService', ()=>{
     expect(console.info).not.toHaveBeenCalled();
   });
 
+  it('Should set param as empty string if called without param', () => {
+    service.logLevel = LogLevel.Info;
+    service.info(message, file);
+    expect(console.info).toHaveBeenCalledWith('%c ' + file + '--' + message, `color: green`, '');
+  });
+
 })
