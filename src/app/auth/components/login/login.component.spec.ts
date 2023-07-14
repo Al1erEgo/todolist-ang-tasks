@@ -63,7 +63,7 @@ describe('LoginComponent', ()=>{
     expect(component.email?.hasError('pattern')).toBeFalsy();
   });
 
-  it('should set password minimum length validation', () => {
+  it('Should set password minimum length validation', () => {
     component.password?.setValue('12');
     expect(component.password?.hasError('minlength')).toBeTruthy();
 
@@ -150,4 +150,71 @@ describe('LoginComponent', ()=>{
 
     expect(inputElement.classList.contains('inputSuccess')).toBeTrue();
   });
+
+  it('Should show pattern warn on invalid email', ()=>{
+    component.email?.setValue('test');
+    const inputElement = fixture.nativeElement.querySelector('input[type="text"]');
+    inputElement.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
+
+    const warnElement = fixture.nativeElement.querySelector('div.error')
+    expect(warnElement.firstElementChild.innerHTML).toEqual('Email incorrect pattern')
+  })
+
+  it('Should show required warn on empty email', ()=>{
+    component.email?.setValue('');
+    const inputElement = fixture.nativeElement.querySelector('input[type="text"]');
+    inputElement.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
+
+    const warnElement = fixture.nativeElement.querySelector('div.error')
+    expect(warnElement.firstElementChild.innerHTML).toEqual('Email is required')
+  })
+
+  it('Should not show warn on correct email', ()=>{
+    component.email?.setValue('test@mail.com');
+    const inputElement = fixture.nativeElement.querySelector('input[type="text"]');
+    inputElement.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
+
+    const warnElement = fixture.nativeElement.querySelector('div.error')
+    expect(warnElement).toBeFalsy()
+  })
+
+  it('Should show pattern warn on short password', ()=>{
+    component.password?.setValue('12');
+    const inputElement = fixture.nativeElement.querySelector('input[type="password"]');
+    inputElement.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
+
+    const warnElement = fixture.nativeElement.querySelector('div.error')
+    expect(warnElement.firstElementChild.innerHTML).toEqual('Password must be at least 3 characters long')
+  })
+
+  it('Should show required warn on empty password', ()=>{
+    component.password?.setValue('');
+    const inputElement = fixture.nativeElement.querySelector('input[type="password"]');
+    inputElement.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
+
+    const warnElement = fixture.nativeElement.querySelector('div.error')
+    expect(warnElement.firstElementChild.innerHTML).toEqual('Password is required')
+  })
+
+  it('Should not show warn on correct password', ()=>{
+    component.password?.setValue('123');
+    const inputElement = fixture.nativeElement.querySelector('input[type="password"]');
+    inputElement.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
+
+    const warnElement = fixture.nativeElement.querySelector('div.error')
+    expect(warnElement).toBeFalsy()
+  })
+
 })
