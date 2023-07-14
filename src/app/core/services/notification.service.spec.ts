@@ -11,7 +11,7 @@ describe('NotificationService', ()=>{
   beforeEach(()=>{
     TestBed.configureTestingModule({
       providers: [NotificationService, {provide: LoggerService, useValue: fakeLoggerService}],
-    })
+  })
     service = TestBed.inject(NotificationService)
     loggerService = TestBed.inject(LoggerService)
   })

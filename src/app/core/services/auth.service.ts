@@ -53,6 +53,7 @@ export class AuthService {
       .subscribe(res => {
         if (res.resultCode === ResultCodeEnum.success) {
           this.logger.info('Logout successful', 'AuthService');
+          this.isAuth = false
           this.router.navigate(['/login'])
         }
       })
