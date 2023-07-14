@@ -201,9 +201,10 @@ describe('TasksService', ()=>{
       startDate: '2023-07-01',
       deadline: '2023-07-07'
     }
+    const otherTask = { id: '1', title: 'Task 1', todoListId: '1', order: 1, addedDate: '2023-06-29', description: 'Task 1 description', completed: false, status: 0, priority: 0, startDate: '', deadline: '' }
 
     it('Should update a task successfully', () => {
-      service.tasks$.next({todoId: [oldTask]})
+      service.tasks$.next({todoId: [oldTask, otherTask]})
       const response: CommonResponseType<{ item: Task }> = {
         data: { item: {
             id: taskId,
@@ -229,7 +230,7 @@ describe('TasksService', ()=>{
       expect(req.request.method).toBe('PUT');
       req.flush(response);
 
-      expect(service.tasks$.value[todoId]).toEqual([response.data.item]);
+      expect(service.tasks$.value[todoId]).toEqual([response.data.item, otherTask]);
       expect(loggerService.info).toHaveBeenCalledWith(
         'Update task request initialised',
         'TasksService',
