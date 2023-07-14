@@ -19,26 +19,30 @@ describe('LoggerService', ()=>{
   const file = 'File name';
   const param = { key: 'value' };
 
-  it('should set logLevel to Info by default', () => {
+  it('Should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('Should set logLevel to Info by default', () => {
     expect(service.logLevel).toEqual(LogLevel.Info);
   });
 
-  it('should call console.error with correct message and params when calling error', () => {
+  it('Should call console.error with correct message and params when calling error', () => {
     service.error(message, file, param);
     expect(console.error).toHaveBeenCalledWith('%c ' + file + '--' + message, `color: red`, param);
   });
 
-  it('should call console.warn with correct message and params when calling warn', () => {
+  it('Should call console.warn with correct message and params when calling warn', () => {
     service.warn(message, file, param);
     expect(console.warn).toHaveBeenCalledWith('%c ' + file + '--' + message, `color: orange`, param);
   });
 
-  it('should call console.info with correct message and params when calling info', () => {
+  it('Should call console.info with correct message and params when calling info', () => {
     service.info(message, file, param);
     expect(console.info).toHaveBeenCalledWith('%c ' + file + '--' + message, `color: green`, param);
   });
 
-  it('should not call console.info when logLevel is set to Warn', () => {
+  it('Should not call console.info when logLevel is set to Warn', () => {
     spyOn(service as any, 'logWith');
     service.logLevel = LogLevel.Warn;
     service.info(message, file, param);

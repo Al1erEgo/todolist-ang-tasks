@@ -24,21 +24,21 @@ describe('NotificationService', ()=>{
     expect(service.notify$.value).toBeNull()
   })
 
-  it('should add error notification and log when calling handleError', () => {
+  it('Should add error notification and log when calling handleError', () => {
     const errorMessage = 'Error message';
     service.handleError(errorMessage);
     expect(service.notify$.value).toEqual({ severity: 'error', message: errorMessage });
     expect(loggerService.error).toHaveBeenCalledWith('Error message added', 'NotificationService');
   });
 
-  it('should add success notification and log when calling handleSuccess', () => {
+  it('Should add success notification and log when calling handleSuccess', () => {
     const successMessage = 'Success message';
     service.handleSuccess(successMessage);
     expect(service.notify$.value).toEqual({ severity: 'success', message: successMessage });
     expect(loggerService.info).toHaveBeenCalledWith('Success message added', 'NotificationService');
   });
 
-  it('should clear notification and log when calling clear', () => {
+  it('Should clear notification and log when calling clear', () => {
     service.clear();
     expect(service.notify$.value).toBeNull();
     expect(loggerService.warn).toHaveBeenCalledWith('Notification cleared', 'NotificationService');

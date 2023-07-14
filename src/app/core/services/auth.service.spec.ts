@@ -47,14 +47,14 @@ describe('AuthService', ()=>{
     httpMock.verify();
   });
 
-  it('should be created', () => {
+  it('Should be created', () => {
     expect(service).toBeTruthy();
   });
 
   describe('login', () => {
     const loginData = { email: 'testuser@mail.com', password: 'password', rememberMe: false };
 
-    it('should send login request and navigate to home page if login is successful', ()=>{
+    it('Should send login request and navigate to home page if login is successful', ()=>{
       const response: CommonResponseType<{ userId: number }> = {
         resultCode: ResultCodeEnum.success,
         data: { userId: 1 },
@@ -73,7 +73,7 @@ describe('AuthService', ()=>{
       expect(loggerService.error).not.toHaveBeenCalled();
     })
 
-    it('should send login request and show error notification if login is unsuccessful', () => {
+    it('Should send login request and show error notification if login is unsuccessful', () => {
       const response: CommonResponseType = {
         resultCode: ResultCodeEnum.error,
         data: {},
@@ -100,7 +100,7 @@ describe('AuthService', ()=>{
       service.isAuth = true
     })
 
-    it('should send logout request and navigate to login page if logout is successful', () => {
+    it('Should send logout request and navigate to login page if logout is successful', () => {
       const response: CommonResponseType = {
         data: {},
         resultCode: ResultCodeEnum.success,
@@ -118,7 +118,7 @@ describe('AuthService', ()=>{
       expect(loggerService.info).toHaveBeenCalledWith('Logout successful', 'AuthService');
     });
 
-    it('should send logout request and do not navigate if logout is unsuccessful', () => {
+    it('Should send logout request and do not navigate if logout is unsuccessful', () => {
       const response: CommonResponseType = {
         data: {},
         resultCode: ResultCodeEnum.error,
@@ -143,7 +143,7 @@ describe('AuthService', ()=>{
       service.isAuth = false
     })
 
-    it('should send me request and set isAuth to true if the response is successful', (done) => {
+    it('Should send me request and set isAuth to true if the response is successful', (done) => {
       const response: CommonResponseType<MeResponse> = {
         resultCode: ResultCodeEnum.success,
         data: { id: 1, email: 'testuser@mail.com', login: 'testUser' },
@@ -164,7 +164,7 @@ describe('AuthService', ()=>{
       })
     });
 
-    it('should send me request and set isAuth to false if the response is unsuccessful', (done) => {
+    it('Should send me request and set isAuth to false if the response is unsuccessful', (done) => {
       const response: CommonResponseType = {
         data: {},
         resultCode: ResultCodeEnum.error,
@@ -186,7 +186,7 @@ describe('AuthService', ()=>{
   });
 
   describe('errorHandler', () => {
-    it('should handle HttpErrorResponse and return EMPTY observable', () => {
+    it('Should handle HttpErrorResponse and return EMPTY observable', () => {
       const errorResponse = new HttpErrorResponse({ status: 500, statusText: 'Internal Server Error' });
 
       const result$: Observable<never> = service['errorHandler'](errorResponse);
