@@ -106,4 +106,48 @@ describe('LoginComponent', ()=>{
       'LoginComponent',
       loginData);
   });
+
+  it('Should add inputError class for input on invalid email', () => {
+    component.email?.setValue('test');
+
+    const inputElement = fixture.nativeElement.querySelector('input[type="text"]');
+    inputElement.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
+
+    expect(inputElement.classList.contains('inputError')).toBeTrue();
+  });
+
+  it('Should add inputError class for input on invalid password', () => {
+    component.password?.setValue('12');
+
+    const inputElement = fixture.nativeElement.querySelector('input[type="password"]');
+    inputElement.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
+
+    expect(inputElement.classList.contains('inputError')).toBeTrue();
+  });
+
+  it('Should add inputSuccess class for input on valid email', () => {
+    component.email?.setValue('test@mail.com');
+
+    const inputElement = fixture.nativeElement.querySelector('input[type="text"]');
+    inputElement.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
+
+    expect(inputElement.classList.contains('inputSuccess')).toBeTrue();
+  });
+
+  it('Should add inputSuccess class for input on valid password', () => {
+    component.password?.setValue('123');
+
+    const inputElement = fixture.nativeElement.querySelector('input[type="password"]');
+    inputElement.dispatchEvent(new Event('input'));
+
+    fixture.detectChanges();
+
+    expect(inputElement.classList.contains('inputSuccess')).toBeTrue();
+  });
 })
