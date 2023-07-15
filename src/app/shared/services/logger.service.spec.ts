@@ -42,11 +42,9 @@ describe('LoggerService', ()=>{
     expect(console.info).toHaveBeenCalledWith('%c ' + file + '--' + message, `color: green`, param);
   });
 
-  it('Should not call console.info when logLevel is set to Warn', () => {
-    spyOn(service as any, 'logWith');
+  it('should not log with LogLevel.Info if logLevel is set to LogLevel.Warn', () => {
     service.logLevel = LogLevel.Warn;
     service.info(message, file, param);
-    expect((service as any).logWith).toHaveBeenCalledWith(LogLevel.Info, message, file, param);
     expect(console.info).not.toHaveBeenCalled();
   });
 
