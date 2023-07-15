@@ -183,6 +183,26 @@ describe('AuthService', ()=>{
         done()
       })
     });
+
+    it('Should call resolveAuthRequest on me() call',  (done)=> {
+      const response: CommonResponseType<MeResponse> = {
+        resultCode: ResultCodeEnum.success,
+        data: { id: 1, email: 'testuser@mail.com', login: 'testUser' },
+        messages: []
+      };
+
+      const resolveAuthRequestSpy = spyOn(service, 'resolveAuthRequest').and.callThrough()
+      service.me()
+       const req: TestRequest = httpMock.expectOne(`${environment.baseUrl}/auth/me`);
+       req.flush(response);
+
+
+      expect(resolveAuthRequestSpy).toHaveBeenCalled()
+      service.authRequest.then(()=>{
+        done()
+      })
+    })
+
   });
 
   describe('errorHandler', () => {
