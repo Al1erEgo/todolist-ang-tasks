@@ -43,7 +43,7 @@ describe('TasksService', ()=>{
   describe('getTasks', () => {
     const todoId = 'todoId';
 
-    it('should retrieve tasks successfully', () => {
+    it('Should retrieve tasks successfully', () => {
       const response: GetTasksResponse = {
         items: [
           { id: '1', title: 'Task 1', todoListId: '1', order: 1, addedDate: '2023-06-29', description: 'Task 1 description', completed: false, status: 0, priority: 0, startDate: '', deadline: '' },
@@ -72,7 +72,7 @@ describe('TasksService', ()=>{
       expect(loggerService.error).not.toHaveBeenCalled();
     });
 
-    it('should handle error while retrieving tasks', () => {
+    it('Should handle error while retrieving tasks', () => {
       const error = new ErrorEvent('Server error');
 
       service.getTasks(todoId);

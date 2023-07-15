@@ -1,5 +1,6 @@
 import { TodoFooterComponent } from './todo-footer.component'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe('TodoFooterComponent', () => {
   let component: TodoFooterComponent
@@ -8,6 +9,7 @@ describe('TodoFooterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TodoFooterComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents()
 
     fixture = TestBed.createComponent(TodoFooterComponent)
