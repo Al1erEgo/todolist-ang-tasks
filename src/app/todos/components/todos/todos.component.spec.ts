@@ -6,6 +6,7 @@ import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {DomainTodo} from "../../models/todos.models";
 import {TodosService} from "../../services/todos.service";
 import {of} from "rxjs";
+import {FormsModule} from "@angular/forms";
 
 describe('TodosComponent', ()=>{
   let component: TodosComponent
@@ -37,6 +38,7 @@ describe('TodosComponent', ()=>{
     const fakeTodosService = jasmine.createSpyObj('TodosService', ['addTodo', 'deleteTodo', 'updateTodoTitle', 'getTodos'])
 
     await TestBed.configureTestingModule({
+      imports: [FormsModule],
       declarations: [TodosComponent],
       providers: [
         {provide: AuthService, useValue: fakeAuthService},
